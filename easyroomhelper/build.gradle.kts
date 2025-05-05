@@ -30,7 +30,7 @@ android {
 }
 
 group = "com.github.islamsaadi"
-version = "1.1.2"
+version = "1.1.3"
 
 dependencies {
 
@@ -40,42 +40,47 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
-    implementation(libs.room.runtime)
-    implementation(libs.room.common.jvm)
+    // --- expose Room to consumers ---
+    api(libs.room.runtime)
+    api(libs.room.common.jvm)
     annotationProcessor(libs.room.compiler)
 
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("release") {
-            groupId = project.group.toString()
-            artifactId = "easyroomhelper"
-            version = project.version.toString()
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                groupId = project.group.toString()
+                artifactId = "easyroomhelper"
+                version = project.version.toString()
 
-            pom {
-                withXml {
-                    val depsNode = asNode().appendNode("dependencies")
-                    configurations["api"].dependencies.forEach { dep ->
-                        val dependencyNode = depsNode.appendNode("dependency")
-                        dependencyNode.appendNode("groupId", dep.group)
-                        dependencyNode.appendNode("artifactId", dep.name)
-                        dependencyNode.appendNode("version", dep.version)
-                        dependencyNode.appendNode("scope", "compile")
-                    }
-                    configurations["implementation"].dependencies.forEach { dep ->
-                        val dependencyNode = depsNode.appendNode("dependency")
-                        dependencyNode.appendNode("groupId", dep.group)
-                        dependencyNode.appendNode("artifactId", dep.name)
-                        dependencyNode.appendNode("version", dep.version)
-                        dependencyNode.appendNode("scope", "runtime")
+                artifact(tasks.getByName("bundleReleaseAar"))
+
+                pom {
+                    withXml {
+                        val depsNode = asNode().appendNode("dependencies")
+                        configurations["api"].dependencies.forEach { dep ->
+                            val dependencyNode = depsNode.appendNode("dependency")
+                            dependencyNode.appendNode("groupId", dep.group)
+                            dependencyNode.appendNode("artifactId", dep.name)
+                            dependencyNode.appendNode("version", dep.version)
+                            dependencyNode.appendNode("scope", "compile")
+                        }
+                        configurations["implementation"].dependencies.forEach { dep ->
+                            val dependencyNode = depsNode.appendNode("dependency")
+                            dependencyNode.appendNode("groupId", dep.group)
+                            dependencyNode.appendNode("artifactId", dep.name)
+                            dependencyNode.appendNode("version", dep.version)
+                            dependencyNode.appendNode("scope", "runtime")
+                        }
                     }
                 }
             }
         }
-    }
 
-    repositories {
-        mavenLocal()
+        repositories {
+            mavenLocal()
+        }
     }
 }
