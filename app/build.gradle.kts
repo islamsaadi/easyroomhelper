@@ -44,6 +44,7 @@ dependencies {
 
     implementation(libs.room.common.jvm)
     implementation(libs.room.runtime.android)
-    project(":easyroomhelper")
+    annotationProcessor(libs.room.compiler)
+    implementation(project(":easyroomhelper"))
 
 }
