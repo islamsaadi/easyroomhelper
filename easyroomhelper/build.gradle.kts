@@ -29,20 +29,21 @@ android {
     }
 }
 
-group = "com.islamsaadi.easyroomhelper"
-version = "1.0.0"
+group = "com.github.islamsaadi"
+version = "1.1.1"
 
 dependencies {
 
     implementation(libs.appcompat)
     implementation(libs.material)
-    implementation(libs.room.common.jvm)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
     implementation(libs.room.runtime)
+    implementation(libs.room.common.jvm)
     annotationProcessor(libs.room.compiler)
+
 }
 
 publishing {
@@ -51,7 +52,6 @@ publishing {
             groupId = project.group.toString()
             artifactId = "easyroomhelper"
             version = project.version.toString()
-//            artifact(tasks.getByName("bundleReleaseAar"))
 
             pom {
                 withXml {
