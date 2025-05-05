@@ -27,4 +27,4 @@ room-runtime-android = { group = "androidx.room", name = "room-runtime-android",
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-
+maven-publish = { id = "maven-publish" }
