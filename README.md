@@ -1,4 +1,4 @@
-# EasyRoomHelper
+# EasyRoomHelper [![](https://jitpack.io/v/islamsaadi/easyroomhelper.svg)](https://jitpack.io/#islamsaadi/easyroomhelper)
 
 A lightweight, generic helper library for Android Room. It provides:
 
@@ -18,7 +18,7 @@ A lightweight, generic helper library for Android Room. It provides:
 
 1. **Add dependencies** in your app module `build.gradle.kts`:
 
-   REPLACE VERSION_TAG with the latest version (1.1.3)
+   REPLACE VERSION_TAG with the latest version [![](https://jitpack.io/v/islamsaadi/easyroomhelper.svg)](https://jitpack.io/#islamsaadi/easyroomhelper)
    ```groovy
    dependencies {
      implementation("com.github.islamsaadi:easyroomhelper:VERSION_TAG")
